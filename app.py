@@ -4,11 +4,29 @@ import os
 from LLM import InternLM_LLM
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
+from Knowledge_base import output_file
+from openxlab.model import download
+
+# 下载 sentence-transformer 模型
+# 设置环境变量
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+# 下载模型
+os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir /home/.cache/model/sentence-transformer')
+
+# 下载 InternLM 模型
+download(model_repo='OpenLMLab/InternLM-7b')
+
+# 目标文件夹
+tar_dir = [
+    "./book"
+]
+
+output_file(tar_dir)
 
 def load_chain():
     # 加载问答链
     # 定义 Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="/root/data/model/sentence-transformer")
+    embeddings = HuggingFaceEmbeddings(model_name="/home/.cache/model/sentence-transformer")
 
     # 向量数据库持久化路径
     persist_directory = 'data_base/vector_db/chroma_book'
@@ -20,7 +38,7 @@ def load_chain():
     )
 
     # 加载自定义 LLM
-    llm = InternLM_LLM(model_path = "/root/model/Shanghai_AI_Laboratory/internlm-chat-7b")
+    llm = InternLM_LLM(model_path = "/home/xlab-app-center/.cache/model/InternLM-7b")
 
     # 定义一个 Prompt Template
     template = """使用以下上下文来回答最后的问题。如果你不知道答案，就说你不知道，不要试图编造答
