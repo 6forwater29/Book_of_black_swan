@@ -17,7 +17,7 @@ os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir ./sentence-transformer')
 
 # 下载 InternLM 模型
-download(model_repo='OpenLMLab/InternLM-7b')
+download(model_repo='OpenLMLab/InternLM-7b', output='/home/xlab-app-center/InternLM-chat-7b')
 
 # 目标文件夹
 tar_dir = [
@@ -41,7 +41,7 @@ def load_chain():
     )
 
     # 加载自定义 LLM
-    llm = InternLM_LLM(model_path = "OpenLMLab/InternLM-7b")
+    llm = InternLM_LLM(model_path = "/home/xlab-app-center/InternLM-chat-7b")
 
     # 定义一个 Prompt Template
     template = """使用以下上下文来回答最后的问题。如果你不知道答案，就说你不知道，不要试图编造答
