@@ -54,7 +54,7 @@ def output_file(tar_dir):
     split_docs = text_splitter.split_documents(docs)
 
     # 加载开源词向量模型
-    embeddings = HuggingFaceEmbeddings(model_name="/home/.cache/model/sentence-transformer")
+    embeddings = HuggingFaceEmbeddings(model_name="./sentence-transformer")
 
     # 构建向量数据库
     # 定义持久化路径

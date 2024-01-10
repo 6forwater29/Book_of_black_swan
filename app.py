@@ -11,7 +11,7 @@ from openxlab.model import download
 # 设置环境变量
 os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 # 下载模型
-os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir /home/.cache/model/sentence-transformer')
+os.system('huggingface-cli download --resume-download sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2 --local-dir ./sentence-transformer')
 
 # 下载 InternLM 模型
 download(model_repo='OpenLMLab/InternLM-7b')
@@ -26,7 +26,7 @@ output_file(tar_dir)
 def load_chain():
     # 加载问答链
     # 定义 Embeddings
-    embeddings = HuggingFaceEmbeddings(model_name="/home/.cache/model/sentence-transformer")
+    embeddings = HuggingFaceEmbeddings(model_name="./sentence-transformer")
 
     # 向量数据库持久化路径
     persist_directory = 'data_base/vector_db/chroma_book'
