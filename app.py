@@ -1,11 +1,14 @@
 from langchain.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 import os
+__import__('pysqlite3')
+import sys
 from LLM import InternLM_LLM
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from Knowledge_base import output_file
 from openxlab.model import download
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 # 下载 sentence-transformer 模型
 # 设置环境变量
